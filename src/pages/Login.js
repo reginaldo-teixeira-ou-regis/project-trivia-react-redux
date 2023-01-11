@@ -1,5 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import logo from '../trivia.png';
+import { saveLogin } from '../redux/actions';
+import fetchToken from '../service/fetchToken';
 
 class Login extends React.Component {
   state = {
@@ -7,6 +11,10 @@ class Login extends React.Component {
     email: '',
     disabled: false,
   };
+
+  /* componentDidUpdate() {
+    this.getToken();
+  } */
 
   handleInput = (event) => {
     const { id, value } = event.target;
@@ -21,7 +29,18 @@ class Login extends React.Component {
   };
 
   handleSubmit = () => {
-    console.log();
+    const { dispatch, history } = this.props;
+    const { dataToken } = this.state;
+    dispatch(saveLogin(dataToken));
+    localStorage.setItem('token', dataToken.token);
+    history.push('/game');
+  };
+
+  getToken = async () => {
+    const dataToken = await fetchToken();
+    this.setState({
+      dataToken,
+    }, this.handleSubmit);
   };
 
   render() {
@@ -56,7 +75,7 @@ class Login extends React.Component {
               type="button"
               data-testid="btn-play"
               disabled={ !disabled }
-              onClick={ this.handleSubmit }
+              onClick={ this.getToken }
             >
               Play
             </button>
@@ -67,4 +86,15 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  ...state.players,
+});
+
+export default connect(mapStateToProps)(Login);
