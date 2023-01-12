@@ -27,8 +27,8 @@ class Login extends React.Component {
 
   handleSubmit = () => {
     const { dispatch, history } = this.props;
-    const { dataToken } = this.state;
-    dispatch(saveLogin(dataToken));
+    const { dataToken, name, email } = this.state;
+    dispatch(saveLogin({ dataToken, name, email }));
     localStorage.setItem('token', dataToken.token);
     history.push('/game');
   };
