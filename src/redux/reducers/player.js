@@ -1,10 +1,8 @@
 import { SAVE_LOGIN } from '../actions';
 
 const INITIAL_STATE = {
-  player: {
-    name: '',
-    email: '',
-  },
+  name: '',
+  email: '',
 };
 
 const playerReducer = (state = INITIAL_STATE, action) => {
@@ -12,7 +10,7 @@ const playerReducer = (state = INITIAL_STATE, action) => {
   case SAVE_LOGIN:
     return {
       ...state,
-      player: { ...action.payload },
+      ...action.payload,
     };
   default:
     return state;
