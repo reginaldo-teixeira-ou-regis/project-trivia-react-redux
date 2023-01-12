@@ -85,3 +85,5 @@ test('Checks if when clicking on the button "Play" the page is redirected', () =
   expect(store.getState().player.email).toEqual('');
 })
 });
+
+//falta fazer a cobertura da função hndleSubmit
