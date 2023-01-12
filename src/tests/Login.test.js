@@ -35,7 +35,12 @@ test('Checks if the Play button is disabled when starting the page', () => {
     expect(btnPlay).toBeDisabled();
 })
 test('Checks if the button is enabled when filling the iputs', () => {
-    renderWithRouterAndRedux(<App />)
+  global.fetch = jest.fn(() => Promise.resolve({
+    json: () => Promise.resolve(mockData),
+  }));
+  const url = 'https://opentdb.com/api_token.php?command=request';
+  renderWithRouterAndRedux(<App />);
+
     const inputName = screen.getByRole('textbox', {
         name: /name/i
       });
@@ -49,6 +54,11 @@ test('Checks if the button is enabled when filling the iputs', () => {
       userEvent.type(inputName, 'Maria');
       userEvent.type(inputEmail, 'maria.santana@outlook.com.br');
       expect(btnPlay).toBeEnabled();
+      userEvent.click(btnPlay)
+
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledWith(url);
+      
     });
 
 test('Checks if when clicking on the button "Configurações" the page is redirected', () => {
@@ -60,30 +70,4 @@ test('Checks if when clicking on the button "Configurações" the page is redire
     userEvent.click(btnSettings);
     expect(history.location.pathname).toBe('/settings');
 })
-test('Checks if when clicking on the button "Play" the page is redirected', () => {
-    const { history, store } = renderWithRouterAndRedux(<App />)
-    const inputName = screen.getByRole('textbox', {
-        name: /name/i
-      });
-    const inputEmail = screen.getByRole('textbox', {
-        name: /email/i
-      });
-    const btnPlay = screen.getByRole('button', {
-        name: /play/i
-      });
-
-  expect(history.location.pathname).toBe('/');
-
-  userEvent.type(inputName, 'Trybe');
-  userEvent.type(inputEmail, 'test@test.com');
-
-  userEvent.click(btnPlay);
-  history.push('/game')
-
-  expect(history.location.pathname).toBe('/game')
-  expect(store.getState().player.name).toEqual('');
-  expect(store.getState().player.email).toEqual('');
-})
 });
-
-//falta fazer a cobertura da função hndleSubmit
