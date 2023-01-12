@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import logo from '../trivia.png';
 import { saveLogin } from '../redux/actions';
 import fetchToken from '../service/fetchToken';
@@ -11,10 +12,6 @@ class Login extends React.Component {
     email: '',
     disabled: false,
   };
-
-  /* componentDidUpdate() {
-    this.getToken();
-  } */
 
   handleInput = (event) => {
     const { id, value } = event.target;
@@ -79,6 +76,14 @@ class Login extends React.Component {
             >
               Play
             </button>
+            <Link to="/settings">
+              <button
+                type="button"
+                data-testid="btn-settings"
+              >
+                Configurações
+              </button>
+            </Link>
           </form>
         </header>
       </main>
