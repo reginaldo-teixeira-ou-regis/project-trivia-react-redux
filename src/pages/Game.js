@@ -24,8 +24,10 @@ class Game extends Component {
           >
             <button
               type="button"
-              data-testid={}
-            />
+              data-testid="errado ou certo"
+            >
+              resposta
+            </button>
           </section>
         </div>
       </main>
