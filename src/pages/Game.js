@@ -59,26 +59,32 @@ class Game extends Component {
       <main>
         <Header />
         <div>
-          <h3 data-testid="question-category">
-            {questionsGame[indexQuestion].category}
-          </h3>
-          <h3 data-testid="question-text">
-            {questionsGame[indexQuestion].question}
-          </h3>
-          <section data-testid="answer-options">
-            {answersGame.map((element, index) => (
-              <Button
-                key={ element }
-                btnOptionsAnswers={ element }
-                testId={
-                  element === correctAnswer
-                    ? 'correct-answer'
-                    : `wrong-answer-${index}`
-                }
-                // onClick={}
-              />
-            ))}
-          </section>
+          {questionsGame.length > 0 ? (
+            <>
+              <h3 data-testid="question-category">
+                {questionsGame[indexQuestion].category}
+              </h3>
+              <h3 data-testid="question-text">
+                {questionsGame[indexQuestion].question}
+              </h3>
+              <section data-testid="answer-options">
+                {answersGame.map((element, index) => (
+                  <Button
+                    key={ element }
+                    btnOptionsAnswers={ element }
+                    testId={
+                      element === correctAnswer
+                        ? 'correct-answer'
+                        : `wrong-answer-${index}`
+                    }
+                    // onClick={}
+                  />
+                ))}
+              </section>
+            </>
+          ) : (
+            <h1>Loading...</h1>
+          )}
         </div>
       </main>
     );
