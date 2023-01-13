@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
-import Game from './pages/Game';
 import Settings from './pages/Settings';
 import './App.css';
 import Feedback from './pages/Feedback';
+import Game from './pages/Game';
 
 class App extends Component {
   render() {
