@@ -20,7 +20,7 @@ class Header extends Component {
 
   render() {
     const { img } = this.state;
-    const { name } = this.props;
+    const { name, score } = this.props;
     console.log(this.props);
     return (
       <header>
@@ -38,7 +38,7 @@ class Header extends Component {
           { name }
         </h2>
         <h2>Score:</h2>
-        <p data-testid="header-score">0</p>
+        <p data-testid="header-score">{score}</p>
       </header>
     );
   }
@@ -47,12 +47,13 @@ class Header extends Component {
 Header.propTypes = {
   email: PropTypes.any,
   name: PropTypes.any,
+  score: PropTypes.any,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
   name: state.player.name,
   email: state.player.email,
-
+  score: state.player.score,
 });
 
 export default connect(mapStateToProps)(Header);

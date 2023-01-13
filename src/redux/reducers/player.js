@@ -3,6 +3,7 @@ import { SAVE_LOGIN } from '../actions';
 const INITIAL_STATE = {
   name: '',
   email: '',
+  score: 0,
 };
 
 const playerReducer = (state = INITIAL_STATE, action) => {
