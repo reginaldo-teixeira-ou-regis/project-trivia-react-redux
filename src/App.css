@@ -63,11 +63,9 @@ body {
 }
 
 .greenColor {
-border-color: rgb(6, 240, 15);
-color: white;
+  border: 3px solid rgb(6, 240, 15);
 }
 
 .redColor {
-border-color: red;
-color: white
+  border: 3px solid red;
 }
