@@ -7,18 +7,18 @@ class Game extends Component {
       <main>
         <Header />
         <div>
-          <p
+          <h3
             data-testid="question-category"
           >
             campo category
 
-          </p>
-          <p
+          </h3>
+          <h4
             data-testid="question-text"
           >
             campo question
 
-          </p>
+          </h4>
           <section
             data-testid="answer-options"
           >
