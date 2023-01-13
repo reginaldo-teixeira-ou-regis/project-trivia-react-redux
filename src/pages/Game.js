@@ -14,9 +14,10 @@ class Game extends Component {
     answersGame: [],
   };
 
-  async componentDidUpdate() {
+  async componentDidMount() {
     const { history } = this.props;
-    const apiQuestion = await fetchQuestion();
+    const token = localStorage.getItem('token');
+    const apiQuestion = await fetchQuestion(token);
     if (apiQuestion.response_code === tokenInvalid) {
       localStorage.removeItem('token');
       history.push('/');
@@ -102,5 +103,3 @@ Game.propTypes = {
 };
 
 export default connect(mapStateToProps)(Game);
-
-//
