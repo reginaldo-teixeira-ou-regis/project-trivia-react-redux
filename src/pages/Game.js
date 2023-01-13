@@ -12,6 +12,8 @@ class Game extends Component {
     questionsGame: [],
     indexQuestion: 0,
     answersGame: [],
+    answerCorrect: '',
+    answersWrong: '',
   };
 
   async componentDidMount() {
@@ -30,6 +32,11 @@ class Game extends Component {
       );
     }
   }
+
+  buttonColor = () => {
+    this.setState({ answerCorrect: 'greenColor',
+      answersWrong: 'redColor' });
+  };
 
   arrayQuestion = (array) => {
     const newArray = [];
@@ -54,7 +61,8 @@ class Game extends Component {
   };
 
   render() {
-    const { questionsGame, indexQuestion, answersGame, correctAnswer } = this.state;
+    const { questionsGame, indexQuestion, answersGame, correctAnswer,
+      answerCorrect, answersWrong } = this.state;
 
     return (
       <main>
@@ -78,7 +86,8 @@ class Game extends Component {
                         ? 'correct-answer'
                         : `wrong-answer-${index}`
                     }
-                    // onClick={}
+                    handleButton={ this.buttonColor }
+                    btnCss={ element === correctAnswer ? answerCorrect : answersWrong }
                   />
                 ))}
               </section>
