@@ -14,6 +14,8 @@ class Game extends Component {
     answersGame: [],
     answerCorrect: '',
     answersWrong: '',
+    timer: 30,
+    intervalTimeId: '',
   };
 
   async componentDidMount() {
@@ -30,12 +32,19 @@ class Game extends Component {
         },
         this.handleQuestion,
       );
+      this.countingTimeStart();
     }
+  }
+
+  componentDidUpdate() {
+    const { timer } = this.state;
+    if (timer === 0) this.endTimer();
   }
 
   buttonColor = () => {
     this.setState({ answerCorrect: 'greenColor',
       answersWrong: 'redColor' });
+    this.endTimer();
   };
 
   arrayQuestion = (array) => {
@@ -60,9 +69,41 @@ class Game extends Component {
     }
   };
 
+  countingTimeStart = () => {
+    const { timer, intervalTimeId } = this.state;
+    const intervalTime = 1000;
+
+    if (intervalTimeId) {
+      this.setState({ timer: 30, intervalTimeId: '' });
+    }
+
+    if (timer === 0) {
+      this.setState({ timer: 30, intervalTimeId: '' });
+    }
+
+    const timerCount = setInterval(() => {
+      this.setState((prevState) => ({
+        ...prevState,
+        timer: prevState.timer - 1,
+        intervalTimeId: timerCount,
+      }));
+    }, intervalTime);
+  };
+
+  handleCountTime = () => {
+    const { timer } = this.state;
+    const timeLimit = 0;
+    if (timer === timeLimit) return true;
+  };
+
+  endTimer = () => {
+    const { intervalTimeId } = this.state;
+    clearInterval(intervalTimeId);
+  };
+
   render() {
     const { questionsGame, indexQuestion, answersGame, correctAnswer,
-      answerCorrect, answersWrong } = this.state;
+      answerCorrect, answersWrong, timer } = this.state;
 
     return (
       <main>
@@ -76,6 +117,7 @@ class Game extends Component {
               <h3 data-testid="question-text">
                 {questionsGame[indexQuestion].question}
               </h3>
+              {timer}
               <section data-testid="answer-options">
                 {answersGame.map((element, index) => (
                   <Button
@@ -88,6 +130,7 @@ class Game extends Component {
                     }
                     handleButton={ this.buttonColor }
                     btnCss={ element === correctAnswer ? answerCorrect : answersWrong }
+                    isDisabled={ this.handleCountTime() }
                   />
                 ))}
               </section>
