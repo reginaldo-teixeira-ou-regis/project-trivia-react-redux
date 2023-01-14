@@ -16,6 +16,8 @@ class Game extends Component {
     answersWrong: '',
     timer: 30,
     intervalTimeId: '',
+    next: '',
+    answeredQuestions: false,
   };
 
   async componentDidMount() {
@@ -42,8 +44,12 @@ class Game extends Component {
   }
 
   buttonColor = () => {
-    this.setState({ answerCorrect: 'greenColor',
-      answersWrong: 'redColor' });
+    this.setState({
+      answerCorrect: 'greenColor',
+      answersWrong: 'redColor',
+      next: true,
+      answeredQuestions: true,
+    });
     this.endTimer();
   };
 
@@ -101,9 +107,36 @@ class Game extends Component {
     clearInterval(intervalTimeId);
   };
 
+  buttonNext = () => {
+    const { indexQuestion } = this.state;
+    if (indexQuestion < four) {
+      this.setState(
+        (prevState) => ({
+          next: false,
+          indexQuestion: prevState.indexQuestion + 1,
+          answerCorrect: '',
+          answersWrong: '',
+        }),
+        this.handleQuestion,
+        this.countingTimeStart(),
+      );
+    } else {
+      const { history } = this.props;
+      history.push('/feedback');
+    }
+  };
+
   render() {
-    const { questionsGame, indexQuestion, answersGame, correctAnswer,
-      answerCorrect, answersWrong, timer } = this.state;
+    const {
+      questionsGame,
+      indexQuestion,
+      answersGame,
+      correctAnswer,
+      answerCorrect,
+      answersWrong,
+      timer,
+      next,
+    } = this.state;
 
     return (
       <main>
@@ -122,14 +155,16 @@ class Game extends Component {
                 {answersGame.map((element, index) => (
                   <Button
                     key={ element }
-                    btnOptionsAnswers={ element }
+                    btnGeneric={ element }
                     testId={
                       element === correctAnswer
                         ? 'correct-answer'
                         : `wrong-answer-${index}`
                     }
                     handleButton={ this.buttonColor }
-                    btnCss={ element === correctAnswer ? answerCorrect : answersWrong }
+                    btnCss={
+                      element === correctAnswer ? answerCorrect : answersWrong
+                    }
                     isDisabled={ this.handleCountTime() }
                   />
                 ))}
@@ -139,6 +174,16 @@ class Game extends Component {
             <h1>Loading...</h1>
           )}
         </div>
+        {next ? (
+          <Button
+            testId="btn-next"
+            disabled={ false }
+            btnGeneric="Next"
+            handleButton={ this.buttonNext }
+          />
+        ) : (
+          ''
+        )}
       </main>
     );
   }
