@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 class Feedback extends Component {
@@ -16,13 +17,21 @@ class Feedback extends Component {
             (assertions < number) ? 'Could be better...' : 'Well Done!'
           }
         </h3>
+        <h2>
+          <Link
+            to="/"
+            data-testid="btn-play-again"
+          >
+            Play Again
+          </Link>
+        </h2>
       </div>
     );
   }
 }
 
 Feedback.propTypes = {
-  assertions: PropTypes.number,
+  assertions: PropTypes.any,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
