@@ -17,14 +17,26 @@ class Feedback extends Component {
             (assertions < number) ? 'Could be better...' : 'Well Done!'
           }
         </h3>
-        <h2>
+        <button
+          type="submit"
+        >
           <Link
             to="/"
             data-testid="btn-play-again"
           >
-            Play Again
+            PLAY AGAIN
           </Link>
-        </h2>
+        </button>
+        <button
+          type="submit"
+        >
+          <Link
+            to="/ranking"
+            data-testid="btn-ranking"
+          >
+            RANKING
+          </Link>
+        </button>
       </div>
     );
   }
