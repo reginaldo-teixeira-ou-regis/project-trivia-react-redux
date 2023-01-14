@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Button extends Component {
   render() {
-    const { testId, btnOptionsAnswers, isDisabled, handleButton, btnCss } = this.props;
+    const { testId, btnGeneric, isDisabled, handleButton, btnCss } = this.props;
     return (
       <button
         type="button"
@@ -12,7 +12,7 @@ class Button extends Component {
         onClick={ handleButton }
         className={ btnCss }
       >
-        {btnOptionsAnswers}
+        {btnGeneric}
       </button>
     );
   }
@@ -20,7 +20,7 @@ class Button extends Component {
 
 Button.propTypes = {
   testId: PropTypes.string.isRequired,
-  btnOptionsAnswers: PropTypes.string.isRequired,
+  btnGeneric: PropTypes.string.isRequired,
   handleButton: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
   btnCss: PropTypes.string.isRequired,
