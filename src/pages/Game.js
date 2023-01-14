@@ -6,6 +6,7 @@ import fetchQuestion from '../service/fetchQuestion';
 import Button from '../components/ButtonAnswers';
 
 const tokenInvalid = 3;
+const numberFour = 4;
 
 class Game extends Component {
   state = {
@@ -109,7 +110,7 @@ class Game extends Component {
 
   buttonNext = () => {
     const { indexQuestion } = this.state;
-    if (indexQuestion < four) {
+    if (indexQuestion < numberFour) {
       this.setState(
         (prevState) => ({
           next: false,
