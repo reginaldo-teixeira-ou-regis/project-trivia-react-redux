@@ -1,5 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import md5 from 'crypto-js/md5';
+import { resetScore } from '../redux/actions';
 import { getRanking } from '../service/saveRanking';
 
 class Ranking extends Component {
@@ -14,6 +18,11 @@ class Ranking extends Component {
     });
   }
 
+  getImg = (email) => {
+    const hash = md5(email).toString();
+    return `https://www.gravatar.com/avatar/${hash}`;
+  };
+
   orderRanking = (ranking) => {
     const orderRanking = ranking.sort((a, b) => Number(b.score) - Number(a.score));
     return orderRanking;
@@ -21,6 +30,7 @@ class Ranking extends Component {
 
   render() {
     const { ranking } = this.state;
+    const { dispatch } = this.props;
 
     return (
       <div>
@@ -33,7 +43,7 @@ class Ranking extends Component {
           {ranking.length !== 0 ? ranking.map((player, index) => (
             <li key={ index }>
               <img
-                src={ player.img }
+                src={ this.getImg(player.email) }
                 alt=""
               />
               <p
@@ -56,6 +66,7 @@ class Ranking extends Component {
         </ol>
         <button
           type="submit"
+          onClick={ () => { dispatch(resetScore()); } }
         >
           <Link
             to="/"
@@ -69,4 +80,8 @@ class Ranking extends Component {
   }
 }
 
-export default Ranking;
+Ranking.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(Ranking);

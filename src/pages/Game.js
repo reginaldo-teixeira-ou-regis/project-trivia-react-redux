@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import fetchQuestion from '../service/fetchQuestion';
 import Button from '../components/ButtonGeneric';
 import { addScore } from '../redux/actions';
+import { setRankingLocalStorage } from '../service/saveRanking';
 
 const numberOne = 1;
 const numberTwo = 2;
@@ -67,7 +68,6 @@ class Game extends Component {
       }
       dispatch(addScore((numberTen + (timer * equalDifficulty))));
     }
-    console.log(target.id, correctAnswerId);
 
     this.endTimer();
   };
@@ -124,6 +124,7 @@ class Game extends Component {
   };
 
   buttonNext = () => {
+    const { name, score, email } = this.props;
     this.endTimer();
     const { indexQuestion } = this.state;
     if (indexQuestion < numberFour) {
@@ -139,6 +140,7 @@ class Game extends Component {
       this.countingTimeStart();
     } else {
       const { history } = this.props;
+      setRankingLocalStorage({ name, score, email });
       history.push('/feedback');
     }
   };
@@ -208,13 +210,19 @@ class Game extends Component {
 
 const mapStateToProps = (globalState) => ({
   ...globalState,
+  name: globalState.player.name,
+  score: globalState.player.score,
+  email: globalState.player.email,
 });
 
 Game.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  email: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-};
+  name: PropTypes.string,
+  score: PropTypes.number,
+}.isRequired;
 
 export default connect(mapStateToProps)(Game);

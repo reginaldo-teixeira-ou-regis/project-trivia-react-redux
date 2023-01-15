@@ -12,6 +12,11 @@ export const addScore = (payload) => ({
   payload,
 });
 
+export const RESET_SCORE = 'RESET_SCORE';
+export const resetScore = () => ({
+  type: RESET_SCORE,
+});
+
 export const GET_REQUEST_QUESTION = 'GET_REQUEST_QUESTION';
 export const getRequestQuestion = (payload) => ({
   type: GET_REQUEST_QUESTION,
