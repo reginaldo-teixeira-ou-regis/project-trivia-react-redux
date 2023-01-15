@@ -3,20 +3,22 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import InfoFeedback from '../components/InfoFeedback';
 
+const numberThree = 3;
 class Feedback extends Component {
   render() {
-    const number = 3;
     const { assertions } = this.props;
     return (
-      <div data-testid="feedback-text">
-        <h2>Tela de Feedback</h2>
+      <div>
         <Header />
-        <h3>
+        <h2>Tela de Feedback</h2>
+        <h3 data-testid="feedback-text">
           {
-            (assertions < number) ? 'Could be better...' : 'Well Done!'
+            assertions < numberThree ? 'Could be better...' : 'Well Done!'
           }
         </h3>
+        <InfoFeedback />
         <button
           type="submit"
         >
@@ -43,7 +45,7 @@ class Feedback extends Component {
 }
 
 Feedback.propTypes = {
-  assertions: PropTypes.any,
+  assertions: PropTypes.number,
 }.isRequired;
 
 const mapStateToProps = (state) => ({

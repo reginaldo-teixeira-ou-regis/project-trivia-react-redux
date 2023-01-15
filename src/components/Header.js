@@ -37,17 +37,17 @@ class Header extends Component {
         <h2 data-testid="header-player-name">
           { name }
         </h2>
-        <h2>Score:</h2>
-        <p data-testid="header-score">{score}</p>
+        <span>Score:</span>
+        <span data-testid="header-score">{score}</span>
       </header>
     );
   }
 }
 
 Header.propTypes = {
-  email: PropTypes.any,
-  name: PropTypes.any,
-  score: PropTypes.any,
+  email: PropTypes.string,
+  name: PropTypes.string,
+  score: PropTypes.number,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
@@ -55,5 +55,11 @@ const mapStateToProps = (state) => ({
   email: state.player.email,
   score: state.player.score,
 });
+
+Header.defaultProps = {
+  name: '',
+  gravatarEmail: '',
+  score: 0,
+};
 
 export default connect(mapStateToProps)(Header);

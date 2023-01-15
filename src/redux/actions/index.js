@@ -6,6 +6,12 @@ export const saveLogin = (playerInfo) => ({
   payload: playerInfo,
 });
 
+export const ADD_SCORE = 'ADD_SCORE';
+export const addScore = (payload) => ({
+  type: ADD_SCORE,
+  payload,
+});
+
 export const GET_REQUEST_QUESTION = 'GET_REQUEST_QUESTION';
 export const getRequestQuestion = (payload) => ({
   type: GET_REQUEST_QUESTION,

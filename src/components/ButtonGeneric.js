@@ -11,6 +11,7 @@ class Button extends Component {
         disabled={ isDisabled }
         onClick={ handleButton }
         className={ btnCss }
+        id={ testId }
       >
         {btnGeneric}
       </button>
