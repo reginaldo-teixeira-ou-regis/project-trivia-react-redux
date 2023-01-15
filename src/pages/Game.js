@@ -67,7 +67,6 @@ class Game extends Component {
       }
       dispatch(addScore((numberTen + (timer * equalDifficulty))));
     }
-    console.log(target.id, correctAnswerId);
 
     this.endTimer();
   };
