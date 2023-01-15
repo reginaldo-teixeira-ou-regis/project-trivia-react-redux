@@ -1,4 +1,4 @@
-import { SAVE_LOGIN, ADD_SCORE } from '../actions';
+import { SAVE_LOGIN, ADD_SCORE, RESET_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -20,6 +20,14 @@ const playerReducer = (state = INITIAL_STATE, action) => {
       score: state.score + action.payload,
       assertions: state.assertions + 1,
 
+    };
+  case RESET_SCORE:
+    return {
+      ...state,
+      name: '',
+      email: '',
+      score: 0,
+      assertions: 0,
     };
   default:
     return state;

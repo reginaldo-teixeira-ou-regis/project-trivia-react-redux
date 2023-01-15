@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import InfoFeedback from '../components/InfoFeedback';
+import { resetScore } from '../redux/actions';
 
 const numberThree = 3;
 class Feedback extends Component {
   render() {
-    const { assertions } = this.props;
+    const { assertions, dispatch } = this.props;
     return (
       <div>
         <Header />
@@ -21,6 +22,7 @@ class Feedback extends Component {
         <InfoFeedback />
         <button
           type="submit"
+          onClick={ () => { dispatch(resetScore()); } }
         >
           <Link
             to="/"
