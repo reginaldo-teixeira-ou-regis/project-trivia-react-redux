@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
+import '../style/Header.css';
+import { AiFillStar } from 'react-icons/ai';
 
 class Header extends Component {
   state = {
@@ -22,23 +24,34 @@ class Header extends Component {
     const { img } = this.state;
     const { name, score } = this.props;
     return (
-      <header>
-        <div>
-          {' '}
-          <img
-            data-testid="header-profile-picture"
-            src={ img }
-            alt=""
-          />
+      <main className="main">
+        <header className="header">
+          <div className="img-player">
+            {' '}
+            <img
+              data-testid="header-profile-picture"
+              src={ img }
+              alt=""
+              className="image"
+            />
 
-        </div>
-
-        <h2 data-testid="header-player-name">
-          { name }
-        </h2>
-        <span>Score:</span>
-        <span data-testid="header-score">{score}</span>
-      </header>
+            <h2
+              data-testid="header-player-name"
+              className="player-name"
+            >
+              { name }
+            </h2>
+          </div>
+          <AiFillStar className="star" />
+          <span
+            data-testid="header-score"
+            className="header-score"
+          >
+            Score:
+            {score}
+          </span>
+        </header>
+      </main>
     );
   }
 }
