@@ -7,63 +7,59 @@
 }
 
 .image {
-  position: absolute;
-  width: 50px;
+  border-radius: 18.137px;
   height: 50px;
   left: 700px;
+  position: absolute;
   top: 39px;
-  border-radius: 18.1373px;
+  width: 50px;
 }
 
 .image-player {
-  position: absolute;
-  width: 1280px;
+  background: white;
   height: 113px;
-  left: 0px;
-  top: 0px;
-  background: #FFFFFF;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1280px;
 }
 
 .header-score {
-  position: absolute;
-  width: 101px;
-  height: 24px;
-  left: 943px;
-  top: 49px;
-  font-family: 'Epilogue';
+  align-items: center;
+  color: black;
+  display: flex;
+  font-size: 22px;
   font-style: normal;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 150%;
-  display: flex;
-  align-items: center;
+  height: 24px;
+  left: 943px;
   letter-spacing: 0.12em;
-  color: #000000;
-
+  line-height: 150%;
+  position: absolute;
+  top: 49px;
+  width: 101px;
 }
 
 .player-name {
-  position: absolute;
-  width: 144px;
-  height: 24px;
-  left: 760px;
-  top: 49px;
-  font-family: '';
+  align-items: center;
+  color: black;
+  display: flex;
+  font-size: 22px;
   font-style: normal;
   font-weight: 400;
-  font-size: 22px;
+  height: 24px;
+  left: 760px;
   line-height: 150%;
-  display: flex;
-  align-items: center;
-  color: #000000;
-
+  position: absolute;
+  top: 49px;
+  width: 144px;
 }
 
 .star {
-  position: absolute;
-  left: 70.36%;
-  top: 8.21%;
   bottom: 90.2%;
+  color: #f9ba18;
   font-size: 25px;
-  color: #F9BA18;
+  left: 70.36%;
+  position: absolute;
+  top: 8.21%;
 }
