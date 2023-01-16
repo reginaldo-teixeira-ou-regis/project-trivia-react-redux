@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import logo from '../trivia.png';
 import { saveLogin } from '../redux/actions';
 import fetchToken from '../service/fetchToken';
-import 'bulma/css/bulma.min.css';
+/* import 'bulma/css/bulma.min.css'; */
+import '../style/Login.css';
 
 class Login extends React.Component {
   state = {
@@ -44,29 +45,28 @@ class Login extends React.Component {
   render() {
     const { name, email, disabled } = this.state;
     return (
-      <main>
-        <header className="App-header">
-          <img src={ logo } className="App-logo" alt="logo" />
-          <p>SUA VEZ</p>
-          <form>
+      <main className="pageLogin">
+        <img src={ logo } className="App-logo" alt="logo" />
+        <header className="App-header container">
+          <form className="formLogin">
             <label htmlFor="name">
-              Name
               <input
                 type="name"
                 id="name"
                 value={ name }
                 data-testid="input-player-name"
                 onChange={ this.handleInput }
+                placeholder="Digite seu nome"
               />
             </label>
             <label htmlFor="email">
-              Email
               <input
                 type="email"
                 id="email"
                 value={ email }
                 data-testid="input-gravatar-email"
                 onChange={ this.handleInput }
+                placeholder="Digite seu e-mail"
               />
             </label>
             <button
