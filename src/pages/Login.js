@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import logo from '../trivia.png';
 import { saveLogin } from '../redux/actions';
 import fetchToken from '../service/fetchToken';
+import 'bulma/css/bulma.min.css';
 
 class Login extends React.Component {
   state = {
