@@ -7,11 +7,3 @@
 .App {
   text-align: center;
 }
-
-.greenColor {
-  border: 3px solid rgb(6, 240, 15);
-}
-
-.redColor {
-  border: 3px solid red;
-}

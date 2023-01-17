@@ -6,6 +6,8 @@ import fetchQuestion from '../service/fetchQuestion';
 import Button from '../components/ButtonGeneric';
 import { addScore } from '../redux/actions';
 import { setRankingLocalStorage } from '../service/saveRanking';
+import '../style/Game.css';
+import { TfiAlarmClock } from 'react-icons/tfi';
 
 const numberOne = 1;
 const numberTwo = 2;
@@ -158,51 +160,61 @@ class Game extends Component {
     } = this.state;
 
     return (
-      <main>
-        <Header />
-        <div>
-          {questionsGame.length > 0 ? (
-            <>
-              <h3 data-testid="question-category">
-                {questionsGame[indexQuestion].category}
-              </h3>
-              <h3 data-testid="question-text">
-                {questionsGame[indexQuestion].question}
-              </h3>
-              {timer}
-              <section data-testid="answer-options">
-                {answersGame.map((element, index) => (
-                  <Button
-                    key={ element }
-                    btnGeneric={ element }
-                    testId={
-                      element === correctAnswer
-                        ? 'correct-answer'
-                        : `wrong-answer-${index}`
-                    }
-                    handleButton={ this.buttonColor }
-                    btnCss={
-                      element === correctAnswer ? answerCorrect : answersWrong
-                    }
-                    isDisabled={ this.handleCountTime() }
-                  />
-                ))}
-              </section>
-            </>
+      <main className="main-game">
+        <header className="header-game">
+          <Header />
+          <div className="container">
+            {questionsGame.length > 0 ? (
+              <>
+                <div className="category">
+                  <h2 data-testid="question-category">
+                    {questionsGame[indexQuestion].category}
+                  </h2>
+                  <h3 data-testid="question-text">
+                    {questionsGame[indexQuestion].question}
+                  </h3>
+                  <span className="game-timer">
+                    <TfiAlarmClock className="clock" />
+                    Tempo:
+                    {' '}
+                    {timer}
+                  </span>
+                </div>
+                <section data-testid="answer-options" className="options">
+                  {answersGame.map((element, index) => (
+                    <Button
+                      className="btn-answers"
+                      key={ element }
+                      btnGeneric={ element }
+                      testId={
+                        element === correctAnswer
+                          ? 'correct-answer'
+                          : `wrong-answer-${index}`
+                      }
+                      handleButton={ this.buttonColor }
+                      btnCss={
+                        element === correctAnswer ? answerCorrect : answersWrong
+                      }
+                      isDisabled={ this.handleCountTime() }
+                    />
+                  ))}
+                </section>
+              </>
+            ) : (
+              <h1>Loading...</h1>
+            )}
+          </div>
+          {next ? (
+            <Button
+              testId="btn-next"
+              disabled={ false }
+              btnGeneric="Next"
+              handleButton={ this.buttonNext }
+            />
           ) : (
-            <h1>Loading...</h1>
+            ''
           )}
-        </div>
-        {next ? (
-          <Button
-            testId="btn-next"
-            disabled={ false }
-            btnGeneric="Next"
-            handleButton={ this.buttonNext }
-          />
-        ) : (
-          ''
-        )}
+        </header>
       </main>
     );
   }
