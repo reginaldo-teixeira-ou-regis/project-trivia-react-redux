@@ -11,20 +11,6 @@
   }
 }
 
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes shake {
 
   10%, 90% {
@@ -46,22 +32,22 @@
 
 .pageLogin {
   align-items: center;
-  background: #00d5e2;
+  background: linear-gradient(to bottom, #3c1b7a, black);
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
 }
 
-.container {
+.container-login {
   align-items: center;
   background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 350px;
   justify-content: center;
-  width: 500px;
+  width: 400px;
 }
 
 .formLogin {
@@ -70,8 +56,40 @@
   gap: 20px;
 }
 
+.exclamationGreen {
+  display: flex;
+  height: 220px;
+  left: 220px;
+  position: absolute;
+  top: 50px;
+}
+
+.exclamationBlue {
+  display: flex;
+  height: 150px;
+  left: 150px;
+  position: absolute;
+  top: 320px;
+}
+
+.exclamationPink {
+  display: flex;
+  height: 250px;
+  position: absolute;
+  right: 170px;
+  top: 230px;
+}
+
+.exclamationOrange {
+  display: flex;
+  height: 120px;
+  position: absolute;
+  right: 320px;
+  top: 30px;
+}
+
 .formLogin input, .formLogin button {
-  border: 1px solid #003be5;
+  border: 1px solid #3c1b7a;
   border-radius: 100px;
   height: 40px;
   max-width: 300px;
@@ -81,12 +99,12 @@
 }
 
 .formLogin input::placeholder {
-  color: #003be5;
+  color: #3c1b7a;
 }
 
 .formLogin button {
-  background-color: #22ad7a;
-  border: 2px solid #003be5;
+  background-color: #717377;
+  border: 1px solid #3c1b7a;
   color: white;
   cursor: pointer;
   font-size: 20px;
@@ -94,8 +112,8 @@
 }
 
 .formLogin button:hover {
-  background-color: #003be5;
-  border: 2px solid white;
+  background: linear-gradient(to bottom right, #3c1b7a, black);
+  border: 2px solid #282c34;
   color: white;
-  transition: 1s;
+  transition: 0.5s;
 }

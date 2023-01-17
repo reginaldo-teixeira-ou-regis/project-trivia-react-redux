@@ -24,32 +24,37 @@ class Header extends Component {
     const { img } = this.state;
     const { name, score } = this.props;
     return (
-      <main className="main">
-        <header className="header">
+      <main className="main-header">
+        <header className="header-header">
           <div className="img-player">
-            {' '}
-            <img
-              data-testid="header-profile-picture"
-              src={ img }
-              alt=""
-              className="image"
-            />
-
-            <h2
-              data-testid="header-player-name"
-              className="player-name"
-            >
-              { name }
-            </h2>
+            <div>
+              <img
+                data-testid="header-profile-picture"
+                src={ img }
+                alt=""
+                className="image"
+              />
+            </div>
+            <div>
+              <h2
+                data-testid="header-player-name"
+                className="player-name"
+              >
+                { name }
+              </h2>
+            </div>
           </div>
-          <AiFillStar className="star" />
-          <span
-            data-testid="header-score"
-            className="header-score"
-          >
-            Score:
-            {score}
-          </span>
+          <div className="scoreboard">
+            <AiFillStar className="star" />
+            <span
+              data-testid="header-score"
+              className="header-score"
+            >
+              Pontos:
+              {' '}
+              {score}
+            </span>
+          </div>
         </header>
       </main>
     );

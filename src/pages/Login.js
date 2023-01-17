@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import logo from '../trivia.png';
+import logo from '../image/trivia.png';
 import { saveLogin } from '../redux/actions';
 import fetchToken from '../service/fetchToken';
-/* import 'bulma/css/bulma.min.css'; */
 import '../style/Login.css';
+import exclamationGreen from '../image/exclamation-green.svg';
+import exclamationBlue from '../image/exclamation-blue.svg';
+import exclamationOrange from '../image/exclamation-orange.svg';
+import exclamationPink from '../image/exclamation-pink.svg';
 
 class Login extends React.Component {
   state = {
@@ -47,7 +50,11 @@ class Login extends React.Component {
     return (
       <main className="pageLogin">
         <img src={ logo } className="App-logo" alt="logo" />
-        <header className="App-header container">
+        <img src={ exclamationGreen } className="exclamationGreen" alt="?-green" />
+        <img src={ exclamationBlue } className="exclamationBlue" alt="?-blue" />
+        <img src={ exclamationOrange } className="exclamationOrange" alt="?-orange" />
+        <img src={ exclamationPink } className="exclamationPink" alt="?-pink" />
+        <header className="App-header container-login">
           <form className="formLogin">
             <label htmlFor="name">
               <input

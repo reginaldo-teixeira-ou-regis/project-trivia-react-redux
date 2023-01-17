@@ -1,27 +1,65 @@
-.main-game {
-  align-items: center;
-  display: flex;
-  justify-content: center;
+body {
+  background: linear-gradient(to bottom right, #3c1b7a, black);
 }
 
 .container {
   display: flex;
   flex-direction: row;
   height: 400px;
-  justify-content: space-around;
-  width: 1290px;
+  justify-content: space-evenly;
+  width: 1292px;
+}
+
+.logo-trivia {
+  display: flex;
+  height: 160px;
+  left: 300px;
+  position: absolute;
+  top: 10px;
+  width: 160px;
+}
+
+.exclamation-green {
+  display: flex;
+  height: 90px;
+  left: 60px;
+  position: absolute;
+  top: 120px;
+}
+
+.exclamation-blue {
+  display: flex;
+  height: 120px;
+  left: 25px;
+  position: absolute;
+  top: 350px;
+}
+
+.exclamation-orange {
+  display: flex;
+  position: absolute;
+  right: 600px;
+  top: 100px;
+}
+
+.exclamation-pink {
+  display: flex;
+  position: absolute;
+  right: 510px;
+  top: 270px;
 }
 
 .category {
   align-items: center;
-  background-color: #00d5e2;
+  background-color: white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   height: 350px;
   justify-content: center;
-  padding: 2%;
-  width: 400px;
+  margin-top: 100px;
+  padding: 3%;
+  width: 500px;
 }
 
 h2 {
@@ -33,9 +71,15 @@ h3 {
 }
 
 .game-timer {
+  font-weight: 700;
+}
+
+.timer-time {
   display: flex;
+  flex-direction: row;
   font-size: 20px;
   font-weight: 500;
+  gap: 7px;
 }
 
 .options {
@@ -45,13 +89,14 @@ h3 {
   flex-direction: column;
   height: 350px;
   justify-content: center;
+  margin-top: 100px;
   padding: 2%;
   width: 400px;
 }
 
-button, .btn-answers {
-  background-color: rgb(92, 86, 86);
-  border: 3px solid black;
+.btn-answers {
+  background-color: #717377;
+  border: 3px solid white;
   border-radius: 10px;
   box-shadow: 8px;
   color: white;
@@ -60,6 +105,38 @@ button, .btn-answers {
   margin: 8px;
   padding: 3px;
   width: 300px;
+}
+
+.btn-answers:hover {
+  background-color: #282c34;
+  border: 3px solid white;
+  box-shadow: 8px;
+  color: white;
+  transition: 0.5s;
+}
+
+.btn-next {
+  background-color: #717377;
+  border: 3px solid white;
+  border-radius: 10px;
+  bottom: 50px;
+  box-shadow: 8px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  left: 803px;
+  margin: 8px;
+  padding: 3px;
+  position: absolute;
+  width: 300px;
+}
+
+.btn-next:hover {
+  background-color: #282c34;
+  border: 3px solid white;
+  box-shadow: 8px;
+  color: white;
+  transition: 0.5s;
 }
 
 .greenColor {
