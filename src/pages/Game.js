@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { TfiAlarmClock } from 'react-icons/tfi';
 import Header from '../components/Header';
 import fetchQuestion from '../service/fetchQuestion';
 import Button from '../components/ButtonGeneric';
 import { addScore } from '../redux/actions';
 import { setRankingLocalStorage } from '../service/saveRanking';
 import '../style/Game.css';
-import { TfiAlarmClock } from 'react-icons/tfi';
+import logoTrivia from '../image/logo trivia.svg';
+import exclamationGreen from '../image/exclamation-green.svg';
+import exclamationBlue from '../image/exclamation-blue.svg';
+import exclamationOrange from '../image/exclamation-orange.svg';
+import exclamationPink from '../image/exclamation-pink.svg';
 
 const numberOne = 1;
 const numberTwo = 2;
@@ -149,18 +154,16 @@ class Game extends Component {
 
   render() {
     const {
-      questionsGame,
-      indexQuestion,
-      answersGame,
-      correctAnswer,
-      answerCorrect,
-      answersWrong,
-      timer,
-      next,
-    } = this.state;
+      questionsGame, indexQuestion, answersGame, correctAnswer,
+      answerCorrect, answersWrong, timer, next } = this.state;
 
     return (
       <main className="main-game">
+        <img src={ logoTrivia } className="logo-trivia" alt="logo-trivia" />
+        <img src={ exclamationGreen } className="exclamation-green" alt="?-green" />
+        <img src={ exclamationBlue } className="exclamation-blue" alt="?-blue" />
+        <img src={ exclamationOrange } className="exclamation-orange" alt="?-orange" />
+        <img src={ exclamationPink } className="exclamation-pink" alt="?-pink" />
         <header className="header-game">
           <Header />
           <div className="container">
@@ -173,17 +176,17 @@ class Game extends Component {
                   <h3 data-testid="question-text">
                     {questionsGame[indexQuestion].question}
                   </h3>
-                  <span className="game-timer">
+                  <div className="timer-time">
                     <TfiAlarmClock className="clock" />
-                    Tempo:
-                    {' '}
-                    {timer}
-                  </span>
+                    <span>Tempo:</span>
+                    <span className="game-timer">
+                      {timer}
+                    </span>
+                  </div>
                 </div>
                 <section data-testid="answer-options" className="options">
                   {answersGame.map((element, index) => (
                     <Button
-                      className="btn-answers"
                       key={ element }
                       btnGeneric={ element }
                       testId={
@@ -193,7 +196,8 @@ class Game extends Component {
                       }
                       handleButton={ this.buttonColor }
                       btnCss={
-                        element === correctAnswer ? answerCorrect : answersWrong
+                        `btn-answers
+                        ${element === correctAnswer ? answerCorrect : answersWrong}`
                       }
                       isDisabled={ this.handleCountTime() }
                     />
@@ -204,8 +208,9 @@ class Game extends Component {
               <h1>Loading...</h1>
             )}
           </div>
-          {next ? (
+          {next || timer === 0 ? (
             <Button
+              btnCss="btn-next"
               testId="btn-next"
               disabled={ false }
               btnGeneric="Next"
