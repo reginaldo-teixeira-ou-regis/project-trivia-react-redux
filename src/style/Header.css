@@ -1,11 +1,12 @@
 .main-header {
   align-items: center;
-  background: white;
+  background-color: white;
   display: flex;
   flex-direction: row;
   height: 80px;
   justify-content: flex-end;
-  width: 1292px;
+  margin: auto;
+  width: 100%;
 }
 
 .header-header {
