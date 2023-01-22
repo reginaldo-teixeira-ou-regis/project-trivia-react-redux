@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
+import { AiFillStar } from 'react-icons/ai';
 import { resetScore } from '../redux/actions';
 import { getRanking } from '../service/saveRanking';
+import '../style/Ranking.css';
 
 class Ranking extends Component {
   state = {
@@ -33,38 +35,48 @@ class Ranking extends Component {
     const { dispatch } = this.props;
 
     return (
-      <div>
+      <div className="ranking-general">
         <h1
+          className="title-h1"
           data-testid="ranking-title"
         >
-          Ranking General
+          RANKING GENERAL
         </h1>
         <ol>
           {ranking.length !== 0 ? ranking.map((player, index) => (
-            <li key={ index }>
+            <li
+              key={ index }
+              className="li"
+            >
+              {' '}
               <img
+                className="img-player"
                 src={ this.getImg(player.email) }
                 alt=""
               />
               <p
                 data-testid={ `player-name-${index}` }
+                className="name"
               >
                 {player.name}
               </p>
+              {' '}
               <p
                 data-testid={ `player-score-${index}` }
+                className="score"
               >
-                <b>{player.score}</b>
-                {' '}
+                <AiFillStar className="star" />
+                <b className="score-number">{player.score}</b>
                 SCORE
               </p>
             </li>
           )) : (
             <div>
-              <h3>NO PLAYER</h3>
+              <h3 className="h3">NO PLAYER</h3>
             </div>) }
         </ol>
         <button
+          className="play-again"
           type="submit"
           onClick={ () => { dispatch(resetScore()); } }
         >
@@ -72,7 +84,7 @@ class Ranking extends Component {
             to="/"
             data-testid="btn-go-home"
           >
-            LOGIN SCREEN
+            PLAY AGAIN
           </Link>
         </button>
       </div>
