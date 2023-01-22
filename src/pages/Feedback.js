@@ -5,16 +5,19 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import InfoFeedback from '../components/InfoFeedback';
 import { resetScore } from '../redux/actions';
+import '../style/Feedback.css';
 
 const numberThree = 3;
 class Feedback extends Component {
   render() {
     const { assertions, dispatch } = this.props;
     return (
-      <div>
+      <div className="feedback-main ">
         <Header />
-        <h2>Tela de Feedback</h2>
-        <h3 data-testid="feedback-text">
+        <h3
+          className="feedback"
+          data-testid="feedback-text"
+        >
           {
             assertions < numberThree ? 'Could be better...' : 'Well Done!'
           }
@@ -23,6 +26,7 @@ class Feedback extends Component {
         <button
           type="submit"
           onClick={ () => { dispatch(resetScore()); } }
+          className="btn-play-again"
         >
           <Link
             to="/"
@@ -33,6 +37,7 @@ class Feedback extends Component {
         </button>
         <button
           type="submit"
+          className="btn-ranking"
         >
           <Link
             to="/ranking"

@@ -1,0 +1,36 @@
+.feedback-main {
+  align-items: stretch;
+  background-color: white;
+  border: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  position: relative;
+}
+
+.feedback {
+  align-items: center;
+  color: #b5b5b5;
+  display: flex;
+  flex-direction: column;
+  font-size: 50px;
+}
+
+.btn-play-again {
+  background: #2fc18c;
+  border-radius: 100px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 25px;
+}
+
+.btn-ranking {
+  background: #2fc18c;
+  border-radius: 100px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 25px;
+}

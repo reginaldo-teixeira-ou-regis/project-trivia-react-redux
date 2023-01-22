@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import '../style/InfoFeedback.css';
 
 class InfoFeedback extends Component {
   render() {
     const { score, assertions } = this.props;
     return (
-      <main>
+      <main className="assertions">
         <section>
-          <span data-testid="feedback-total-score">
+          <h4>Total of</h4>
+          <span
+            data-testid="feedback-total-score"
+            className="score-feedback"
+          >
             { score }
           </span>
         </section>
+        <br />
         <section>
-          <span data-testid="feedback-total-question">
+          <h4>Total of assertions</h4>
+          <span
+            data-testid="feedback-total-question"
+            className="assertions-feedback"
+          >
             { assertions }
           </span>
         </section>
