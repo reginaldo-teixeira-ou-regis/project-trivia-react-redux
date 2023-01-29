@@ -49,7 +49,7 @@ class Login extends React.Component {
     const { name, email, disabled } = this.state;
     return (
       <main className="pageLogin">
-        <img src={ logo } className="App-logo" alt="logo" />
+        <img src={ logo } className="App-logo" alt="logo" data-testid="logo-trivia" />
         <img src={ exclamationGreen } className="exclamationGreen" alt="?-green" />
         <img src={ exclamationBlue } className="exclamationBlue" alt="?-blue" />
         <img src={ exclamationOrange } className="exclamationOrange" alt="?-orange" />
@@ -63,7 +63,7 @@ class Login extends React.Component {
                 value={ name }
                 data-testid="input-player-name"
                 onChange={ this.handleInput }
-                placeholder="Digite seu nome"
+                placeholder="Type your name"
               />
             </label>
             <label htmlFor="email">
@@ -73,7 +73,7 @@ class Login extends React.Component {
                 value={ email }
                 data-testid="input-gravatar-email"
                 onChange={ this.handleInput }
-                placeholder="Digite seu e-mail"
+                placeholder="Type your email"
               />
             </label>
             <button
@@ -89,7 +89,7 @@ class Login extends React.Component {
                 type="button"
                 data-testid="btn-settings"
               >
-                Configurações
+                Settings
               </button>
             </Link>
           </form>

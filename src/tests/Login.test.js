@@ -1,88 +1,149 @@
 import React from "react";
-import Login from "../pages/Login";
-import App from "../App";
-import { screen, waitFor } from "@testing-library/react";
+import { screen, waitFor, fireEvent } from "@testing-library/react";
 import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
 import userEvent from "@testing-library/user-event";
-import mockData from "./helpers/mockData";
+import App from "../App";
+import Game from "../pages/Game";
+import { act } from "react-dom/test-utils";
 
-describe("Test login page", () => {
-  it("Checks if the inputs and buttons are on the screen", () => {
+describe("Testing the page of Login", () => {
+  it("Testing if the page Login render normally", () => {
     renderWithRouterAndRedux(<App />);
-    const inputName = screen.getByRole("textbox", {
-      name: /name/i,
-    });
-    const inputEmail = screen.getByRole("textbox", {
-      name: /email/i,
-    });
-    const btnPlay = screen.getByRole("button", {
-      name: /play/i,
-    });
-    const btnSettings = screen.getByRole("button", {
-      name: /configurações/i,
-    });
 
-    expect(inputName).toBeInTheDocument();
+    const inputName = screen.getByPlaceholderText("Type your name");
+    const inputEmail = screen.getByPlaceholderText("Type your email");
+    const btnPlay = screen.getByRole("button", { name: /play/i });
+
     expect(inputEmail).toBeInTheDocument();
+    expect(inputName).toBeInTheDocument();
     expect(btnPlay).toBeInTheDocument();
-    expect(btnSettings).toBeInTheDocument();
+
+    expect(inputName.value).toBe("");
+    expect(inputName.id).toBe("name");
+    expect(inputEmail.value).toBe("");
+    expect(btnPlay.disabled).toBe(true);
+
+    userEvent.type(inputName, "Trybe");
+
+    expect(inputName.value).toBe("Trybe");
+    expect(btnPlay.disabled).toBe(true);
+
+    userEvent.type(inputEmail, "test@test.com");
+
+    expect(inputEmail.value).toBe("test@test.com");
+    expect(btnPlay.disabled).toBe(false);
   });
 
-  it("Checks if the Play button is disabled when starting the page", () => {
-    renderWithRouterAndRedux(<App />);
-    const btnPlay = screen.getByRole("button", {
-      name: /play/i,
-    });
-    expect(btnPlay).toBeDisabled();
-  });
-
-  it("Checks if the button is enabled when filling the iputs", async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(mockData),
-      })
-    );
-    const url = "https://opentdb.com/api_token.php?command=request";
-
+  it('Checks that the "Play" button redirects to the game screen and that the quizzes are rendered correc', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
 
-    const inputName = screen.getByRole("textbox", {
-      name: /name/i,
-    });
-    const inputEmail = screen.getByRole("textbox", {
-      name: /email/i,
-    });
-    const btnPlay = screen.getByRole("button", {
-      name: /play/i,
-    });
+    const inputName = screen.getByPlaceholderText("Type your name");
+    const inputEmail = screen.getByPlaceholderText("Type your email");
+    const btnPlay = screen.getByRole("button", { name: /play/i });
 
-    userEvent.type(inputName, "Maria");
-    userEvent.type(inputEmail, "maria.santana@outlook.com.br");
-    expect(btnPlay).toBeEnabled();
+    expect(history.location.pathname).toBe("/");
+
+    userEvent.type(inputName, "Trybe");
+    userEvent.type(inputEmail, "test@test.com");
     userEvent.click(btnPlay);
 
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-    expect(global.fetch).toHaveBeenCalledWith(url);
-    await waitFor(() => expect(history.location.pathname).toBe("/game"));
+    const headerScore = await screen.findByTestId("header-score");
+    const questionCategory = await screen.findByTestId("question-category");
+    const questionText = await screen.findByTestId("question-text");
+    const answerOptions = await screen.findByTestId("answer-options");
+
+    expect(headerScore).toBeInTheDocument();
+    expect(questionCategory).toBeInTheDocument();
+    expect(questionText).toBeInTheDocument();
+    expect(answerOptions).toBeInTheDocument();
+
+    expect(history.location.pathname).toBe("/game");
+
+    const gameTimer = await screen.findByTestId("game-timer");
+    expect(gameTimer).toHaveTextContent("30");
+    await waitFor(
+      () => {
+        expect(gameTimer).toHaveTextContent("29");
+      },
+      { timeout: 10000 }
+    );
+
+    const correctAnswer01 = await screen.findByTestId("correct-answer");
+    userEvent.click(correctAnswer01);
+    const btnNext1 = await screen.findByTestId("btn-next");
+    userEvent.click(btnNext1);
+
+    const correctAnswer02 = await screen.findByTestId("correct-answer");
+    userEvent.click(correctAnswer02);
+    const btnNext2 = await screen.findByTestId("btn-next");
+    userEvent.click(btnNext2);
+
+    const correctAnswer03 = await screen.findByTestId("correct-answer");
+    userEvent.click(correctAnswer03);
+    const btnNext3 = await screen.findByTestId("btn-next");
+    userEvent.click(btnNext3);
+
+    const correctAnswer04 = await screen.findByTestId("correct-answer");
+    userEvent.click(correctAnswer04);
+    const btnNext4 = await screen.findByTestId("btn-next");
+    userEvent.click(btnNext4);
+
+    const correctAnswer05 = await screen.findByTestId("correct-answer");
+    userEvent.click(correctAnswer05);
+    const btnNext5 = await screen.findByTestId("btn-next");
+    userEvent.click(btnNext5);
+
+    expect(history.location.pathname).toBe("/feedback");
+    const feedbackText = await screen.findByTestId("feedback-text");
+    expect(feedbackText).toBeInTheDocument();
   });
 
-  it('Checks if when clicking on the button "Configurações" the page is redirected', () => {
+  it("Check if there is a button that when clicked goes to the settings page", async () => {
     const { history } = renderWithRouterAndRedux(<App />);
-    const btnSettings = screen.getByRole("button", {
-      name: /configurações/i,
-    });
-    expect(btnSettings).toBeInTheDocument();
+
+    const btnSettings = screen.getByTestId("btn-settings");
+
     userEvent.click(btnSettings);
+
     expect(history.location.pathname).toBe("/settings");
+
+    const settingsTitle = await screen.findByTestId("settings-title");
+    expect(settingsTitle).toBeInTheDocument();
   });
 
-  it('Checks if the title it is in page "Game"', () => {
-    renderWithRouterAndRedux(<App />, { initialEntries: ["/game"] });
+  it("", async () => {
+    const { history } = renderWithRouterAndRedux(<Game />);
 
-    const titleGame = screen.findByRole("heading", {
-      name: /game/i,
+    const gameTimer = await screen.findByTestId("game-timer");
+    expect(gameTimer).toHaveTextContent("30");
+    await waitFor(
+      () => {
+        expect(gameTimer).toHaveTextContent("0");
+      },
+      { timeout: 10000 }
+    );
+    setTimeout(async () => {
+      const correctAnswer = await screen.findByTestId("correct-answer");
+      expect(correctAnswer.disabled).toBe(true);
+    }, 500);
+  });
+
+  /* it("reseta o timer para 30 quando ele chega a 0", async () => {
+    renderWithRouterAndRedux(<Game />);
+
+    const timerDisplay = await screen.findByTestId("game-timer");
+
+    act(() => {
+      fireEvent.click(getByTestId("btn-next"));
+    });
+    act(() => {
+      jest.advanceTimersByTime(31000);
     });
 
-    expect(titleGame).toBeDefined();
-  });
+    expect(timerDisplay).toHaveTextContent("30");
+  }); */
+
+  
 });
+
+// 95.65 | 80 | 100 | 96.71

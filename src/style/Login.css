@@ -100,6 +100,7 @@
 
 .formLogin input::placeholder {
   color: #3c1b7a;
+  opacity: 40%;
 }
 
 .formLogin button {
