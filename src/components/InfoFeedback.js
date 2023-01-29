@@ -9,22 +9,19 @@ class InfoFeedback extends Component {
     return (
       <main className="assertions">
         <section>
-          <h4>Total of</h4>
-          <span
-            data-testid="feedback-total-score"
-            className="score-feedback"
-          >
-            { score }
+          <h4>Total of Score:</h4>
+          <span className="score-feedback" data-testid="feedback-total-score">
+            {score}
           </span>
         </section>
         <br />
         <section>
-          <h4>Total of assertions</h4>
+          <h4>Total of Assertions:</h4>
           <span
-            data-testid="feedback-total-question"
             className="assertions-feedback"
+            data-testid="feedback-total-question"
           >
-            { assertions }
+            {assertions}
           </span>
         </section>
       </main>
