@@ -179,7 +179,7 @@ class Game extends Component {
                   <div className="timer-time">
                     <TfiAlarmClock className="clock" />
                     <span>Tempo:</span>
-                    <span className="game-timer">
+                    <span className="game-timer" data-testId="game-timer">
                       {timer}
                     </span>
                   </div>
