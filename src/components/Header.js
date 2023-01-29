@@ -47,9 +47,11 @@ class Header extends Component {
           <div className="scoreboard">
             <AiFillStar className="star" />
             <span className="header-score">
-              Score:
-              {' '}
-              <span data-testid="header-score">{score}</span>
+              <span data-testid="header-score">
+                Score:
+                {' '}
+                {score}
+              </span>
             </span>
           </div>
         </header>
