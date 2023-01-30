@@ -128,22 +128,35 @@ describe("Testing the page of Login", () => {
     }, 500);
   });
 
-  /* it("reseta o timer para 30 quando ele chega a 0", async () => {
+  it("reseta o timer para 30 quando ele chega a 0", async () => {
     renderWithRouterAndRedux(<Game />);
-
-    const timerDisplay = await screen.findByTestId("game-timer");
-
-    act(() => {
-      fireEvent.click(getByTestId("btn-next"));
-    });
-    act(() => {
-      jest.advanceTimersByTime(31000);
-    });
-
-    expect(timerDisplay).toHaveTextContent("30");
-  }); */
-
   
+    const gameTimer = await screen.findByTestId("game-timer");
+    expect(gameTimer).toHaveTextContent("30");
+    await waitFor(
+      () => {
+        expect(screen.getByText("0"));
+      },
+      { timeout: 30000 }
+    );
+    setTimeout(async () => {
+      const correctAnswer = await screen.findByTestId("correct-answer");
+      const wrongAnswer = await screen.findByTestId("wrong-answer");
+      expect(correctAnswer.disabled).toBe(false);
+      expect(wrongAnswer.disabled).toBe(false);
+      fireEvent.click(wrongAnswer);
+      expect(wrongAnswer.disabled).toBe(true);
+      expect(correctAnswer.disabled).toBe(true);
+    }, 500);
+
+    act(async () => {
+      const btnNext = await screen.findAllByTestId("btn-next");
+      expect(btnNext).toBeInTheDocument();
+      userEvent.click(btnNext);
+      expect(gameTimer).toHaveTextContent("30");
+      expect(btnNext).not.toBeInTheDocument();
+    });
+  });
 });
 
 // 95.65 | 80 | 100 | 96.71

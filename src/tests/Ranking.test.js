@@ -25,6 +25,25 @@ describe("Testing the page of Ranking", () => {
     expect(screen.getByTestId("player-name-2")).toBeInTheDocument();
   });
 
+  /* it("Checks that players ranking", () => {
+    localStorage.removeItem('ranking')
+
+    const { history } = renderWithRouterAndRedux(<App />);
+
+    // Object.defineProperty(window, "localStorage", { value: mock });
+
+    act(() => history.push("/ranking"));
+
+    const playerOne = screen.getByTestId("player-name-0");
+    const score_1 = screen.getByTestId("player-score-0");
+
+    expect(playerOne).toBe(0);
+    expect(score_1).toBe(0);
+
+    expect(screen.getByTestId("player-name-1")).not.toBeInTheDocument();
+    expect(screen.getByTestId("player-name-2")).not.toBeInTheDocument();
+  }); */
+  
   it("Checks if there is a button that redirects the player to the Login screen", () => {
     const { history } = renderWithRouterAndRedux(<Ranking />);
 

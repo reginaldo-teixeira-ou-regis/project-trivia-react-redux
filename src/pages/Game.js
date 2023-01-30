@@ -111,6 +111,7 @@ class Game extends Component {
 
     if (timer === 0) {
       this.setState({ timer: 30 });
+      console.log('qualquer coisa');
     }
 
     this.timerCount = setInterval(() => {
